@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validação de CIE - Carteira de Identificação Estudantil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Rubik', sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background-color: #487c99;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .validation-result {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: 500;
+            font-size: 18px;
+        }
+        
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+        
+        .photo-section {
+            flex: 1;
+            min-width: 250px;
+            padding: 20px;
+            text-align: center;
+            border-right: 1px solid #eee;
+        }
+        
+        .photo-placeholder {
+            width: 180px;
+            height: 240px;
+            background-color: #f0f0f0;
+            border: 2px dashed #ccc;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            font-size: 14px;
+            overflow: hidden;
+        }
+        
+        .student-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .info-section {
+            flex: 2;
+            min-width: 300px;
+            padding: 20px;
+        }
+        
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        
+        .info-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .info-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .info-label {
+            font-weight: 500;
+            color: #555;
+            width: 40%;
+        }
+        
+        .certificate-section {
+            padding: 20px;
+            border-top: 1px solid #eee;
+            background-color: #f9f9f9;
+        }
+        
+        .certificate-title {
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: #487c99;
+        }
+        
+        .certificate-content {
+            background-color: #f0f0f0;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 14px;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+        
+        .actions {
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #eee;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #487c99;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            margin: 0 10px;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .btn:hover {
+            background-color: #3a647d;
+        }
+        
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #777;
+            font-size: 14px;
+            border-top: 1px solid #eee;
+        }
+        
+        .watermark {
+            position: absolute;
+            opacity: 0.1;
+            font-size: 120px;
+            font-weight: bold;
+            color: #487c99;
+            transform: rotate(-45deg);
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+            }
+            
+            .photo-section {
+                border-right: none;
+                border-bottom: 1px solid #eee;
+            }
+            
+            .watermark {
+                font-size: 80px;
+            }
+        }
+        
+        @media print {
+            .btn {
+                display: none;
+            }
+            
+            .watermark {
+                opacity: 0.05;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="watermark">VÁLIDO</div>
+        
+        <header>
+            <div class="logo">Meia-entrada.org.br</div>
+            <div class="subtitle">Sistema de Validação de Carteira de Identificação Estudantil</div>
+        </header>
+        
+        <div class="validation-result">
+            ✓ Documento válido!
+        </div>
+        
+        <div class="content">
+            <div class="photo-section">
+                <div class="photo-placeholder">
+                    <img src="1.jpg" alt="Foto do Estudante" class="student-photo">
+                </div>
+                <p><strong>Foto oficial do estudante</strong></p>
+                <p style="font-size: 14px; color: #777; margin-top: 5px;">A foto deve corresponder ao portador da carteira</p>
+            </div>
+            
+            <div class="info-section">
+                <h2 style="color: #487c99; margin-bottom: 20px;">Informações do Estudante</h2>
+                
+                <table class="info-table">
+                    <tr>
+                        <td class="info-label">Nome:</td>
+                        <td><strong>Allany do Nascimento Ferreira Jorge</strong></td>
+                    </tr>
+                    <tr>
+                        <td class="info-label">CPF:</td>
+                        <td>481.734.078-94</td>
+                    </tr>
+                    <tr>
+                        <td class="info-label">Data de Nascimento:</td>
+                        <td>29/04/2001</td>
+                    </tr>
+                    <tr>
+                        <td class="info-label">Instituição:</td>
+                        <td>Universidade de Mogi das Cruzes</td>
+                    </tr>
+                    <tr>
+                        <td class="info-label">Curso:</td>
+                        <td>Arquitetura e Urbanismo</td>
+                    </tr>
+                    <tr>
+                        <td class="info-label">Documento de Identificação:</td>
+                        <td>000000374753696</td>
+                    </tr>
+                    <tr>
+                        <td class="info-label">Emissor:</td>
+                        <td>UNE</td>
+                    </tr>
+                    <tr>
+                        <td class="info-label">Status:</td>
+                        <td style="color: #4CAF50;">✓ Regularmente matriculado(a)</td>
+                    </tr>
+                    <tr>
+                        <td class="info-label">Validade:</td>
+                        <td>31/12/2025</td>
+                    </tr>
+                </table>
+                
+                <div style="background-color: #e8f4fd; padding: 15px; border-radius: 5px; margin-top: 20px;">
+                    <p style="color: #487c99; font-weight: 500;">Declaração da UNE:</p>
+                    <p style="margin-top: 5px;">"A UNE atesta que <strong>Allany do Nascimento Ferreira Jorge</strong> é estudante e está regularmente matriculado(a) em <strong>Arquitetura e Urbanismo</strong> da instituição <strong>Universidade de Mogi das Cruzes</strong>."</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="certificate-section">
+            <div class="certificate-title">Certificado de Atributo em formato PEM:</div>
+            <div class="certificate-content">
+-----BEGIN CERTIFICATE-----
+MIIFazCCA1OgAwIBAgIUN4d6pKzHjT3wVhxVQ6N8P6wq9QEwDQYJKoZIhvcNAQEL
+BQAwRTELMAkGA1UEBhMCQk4xGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExGzAZ
+BgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xNzA0MjgxNjA2MzBaFw0yNzA0
+MjgxNjA2MzBaMEUxCzAJBgNVBAYTAkJOMRkwFwYDVQQKExBHbG9iYWxTaWduIG52
+LXNhMRswGQYDVQQDExJHbG9iYWxTaWduIFJvb3QgQ0EwggIiMA0GCSqGSIb3DQEB
+AQUAA4ICDwAwggIKAoICAQDM6g5p8S5dWzQ7O2Q9Y5JYw1JQc8q3Z0J5J5J5J5J5
+J5J5J5J5J5J5J5J5J5J5J5J5J5J5J5J5J5J5J5J5J5J5J5J5J5J5J5J
